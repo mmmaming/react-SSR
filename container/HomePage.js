@@ -1,9 +1,16 @@
 import React from 'react';
 
 const HomePage = () => {
+    const handleClick = () => {
+        console.log('oh, you clicked me');
+    }
+
     return (
         <div>
-            HomePage
+            <h2>
+                HomePage
+            </h2>
+            <button onClick={handleClick}>click me</button>
         </div>
     )
 };
