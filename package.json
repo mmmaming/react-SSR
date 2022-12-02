@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build:server": "webpack --config webpack.server.js",
-    "build:client": "webpack --config webpack.client.js"
+    "build:client": "webpack --config webpack.client.js",
+    "start:server": "nodemon --watch build --exec node './bundle/index.js'",
+    "start": "npm-run-all  -p build:server build:client start:server"
   },
   "repository": {
     "type": "git",
