@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build:server": "webpack --config webpack.server.js",
-    "build:client": "webpack --config webpack.client.js",
+    "build:server": "webpack --config webpack.server.js --watch",
+    "build:client": "webpack --config webpack.client.js --watch",
     "start:server": "nodemon --watch build --exec node './bundle/index.js'",
     "start": "npm-run-all  -p build:server build:client start:server"
   },
@@ -27,6 +27,8 @@
     "express": "^4.18.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router": "^6.4.4",
+    "react-router-dom": "^6.4.4",
     "webpack": "^5.75.0",
     "webpack-cli": "^5.0.0",
     "webpack-node-externals": "^3.0.0"
