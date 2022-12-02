@@ -5,6 +5,8 @@ import HomePage from "../container/HomePage";
 
 const app = express();
 
+app.use(express.static("public"));
+
 app.get('/', (req, res) => {
     const content = renderToString(<HomePage />);
     res.send(`
@@ -13,7 +15,8 @@ app.get('/', (req, res) => {
                <title>React Server Side Render</title>
            </head>
            <body>
-               ${content}
+               <div id="root">${content}</div>
+               <script src="./index.js"></script>
            </body>
         </html>
 `)
