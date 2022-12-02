@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
     const handleClick = () => {
@@ -11,6 +12,9 @@ const HomePage = () => {
                 HomePage
             </h2>
             <button onClick={handleClick}>click me</button>
+            <div>
+                <Link to="/park">Go to Park</Link>
+            </div>
         </div>
     )
 };
