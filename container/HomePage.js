@@ -2,17 +2,22 @@ import React, {useEffect, useState} from 'react';
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-const HomePage = () => {
-    const [ state, setState ] = useState(null);
+export const fetchServerData = () => {
+    return axios.get("https://api.apiopen.top/api/getHaoKanVideo?page=0&size=2");
+}
+
+const HomePage = (props) => {
+    const [ state, setState ] = useState(props?.serverData);
     const handleClick = () => {
         console.log('oh, you clicked me');
     }
 
-
     useEffect(() => {
-        axios.get("https://api.apiopen.top/api/getHaoKanVideo?page=0&size=2").then(res => {
-            setState(res?.data?.result?.list)
-        })
+        const fetchData = async () => {
+            const res = await fetchServerData();
+            setState(res?.data?.result?.list);
+        };
+        fetchData();
     }, []);
     return (
         <div>

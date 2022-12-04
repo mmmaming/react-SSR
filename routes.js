@@ -1,14 +1,20 @@
 import React from 'react';
-import { Route } from "react-router-dom";
-import { Routes } from "react-router";
-import HomePage from "./container/HomePage";
+import HomePage, {fetchServerData} from "./container/HomePage";
 import Park from "./container/Park";
 
-export default (
-    <div>
-        <Routes>
-            <Route exact path="/" element={<HomePage />} />
-            <Route exact path="/park" element={<Park />} />
-        </Routes>
-    </div>
-)
+export default [
+    {
+        path: "/",
+        element: HomePage,
+        loadData: fetchServerData,
+        exact: true,
+        key: "homepage"
+    },
+    {
+        path: "/park",
+        element: Park,
+        exact: true,
+        key: "park"
+    }
+]
+

@@ -1,12 +1,20 @@
-import React from'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Routes } from "react-router";
 import routes from "../routes";
 
 const App = () => {
     return (
         <Router>
-            {routes}
+            <Routes>
+                {routes.map(route => {
+                    const Component = route.element;
+                    return (
+                        <Route {...route} element={<Component />}/>
+                    )
+                })}
+            </Routes>
         </Router>
     )
 }

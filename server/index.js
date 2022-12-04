@@ -1,22 +1,40 @@
 import express from 'express';
 import React from 'react';
-import { renderToString } from "react-dom/server";
-import { StaticRouter } from "react-router-dom/server";
-import HomePage from "../container/HomePage";
+import {renderToString} from "react-dom/server";
+import {StaticRouter} from "react-router-dom/server";
 import routes from "../routes";
+import { matchPath, Routes } from "react-router";
+import { Route } from "react-router-dom";
 
 const app = express();
 
 app.use(express.static("public"));
 
 app.get('*', (req, res) => {
-    const content = renderToString(
-        <StaticRouter location={req.path}>
-            {routes}
-        </StaticRouter>
-    );
+    let matchedRoute = {};
+    routes.forEach(route => {
+        if(matchPath(route, req.path)) {
+            matchedRoute = matchPath(route, req.path);
+        }
+    });
 
-    res.send(`
+    matchedRoute.pattern.loadData().then(resData => {
+        window
+        const content = renderToString(
+            <StaticRouter location={req.path}>
+                <Routes>
+                    {routes.map(route => {
+                        const Component = route.element;
+                        return (
+                            <Route {...route} element={<Component serverData={resData?.data?.result?.list}/>}/>
+                        )
+
+
+                    })}
+                </Routes>
+            </StaticRouter>
+        );
+        res.send(`
         <html>
            <head>
                <title>React Server Side Render</title>
@@ -27,6 +45,11 @@ app.get('*', (req, res) => {
            </body>
         </html>
 `)
+    })
+
+
+
+
 });
 
 app.listen(3000, () => console.log('listening on port 3000!'))
