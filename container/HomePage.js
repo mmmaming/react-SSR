@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState} from 'react';
 import { Link } from "react-router-dom";
 import axios from "axios";
 
@@ -7,18 +7,12 @@ export const fetchServerData = () => {
 }
 
 const HomePage = (props) => {
+
     const [ state, setState ] = useState(props?.serverData);
     const handleClick = () => {
         console.log('oh, you clicked me');
     }
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const res = await fetchServerData();
-            setState(res?.data?.result?.list);
-        };
-        fetchData();
-    }, []);
     return (
         <div>
             <h2>

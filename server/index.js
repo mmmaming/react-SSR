@@ -19,7 +19,6 @@ app.get('*', (req, res) => {
     });
 
     matchedRoute.pattern.loadData().then(resData => {
-        window
         const content = renderToString(
             <StaticRouter location={req.path}>
                 <Routes>
@@ -41,7 +40,11 @@ app.get('*', (req, res) => {
            </head>
            <body>
                <div id="root">${content}</div>
-               <script src="./index.js"></script>
+               
+             <script>
+                window.serverData = ${JSON.stringify(resData?.data?.result?.list)}
+              </script>
+              <script src="./index.js"></script>
            </body>
         </html>
 `)

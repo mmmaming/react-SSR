@@ -11,7 +11,7 @@ const App = () => {
                 {routes.map(route => {
                     const Component = route.element;
                     return (
-                        <Route {...route} element={<Component />}/>
+                        <Route {...route} element={<Component serverData={window.serverData} />}/>
                     )
                 })}
             </Routes>
